@@ -46,7 +46,7 @@ public class CarUtil {
 
     public static ObservableList<PieChart.Data> readData(){
 
-        String select = "SELECT YEAR, count(*) FROM CARS GROUP BY YEAR";
+        String select = "SELECT YEAR, count(*) as Count FROM CARS GROUP BY YEAR";
 
         ObservableList<PieChart.Data> observableList = FXCollections.observableArrayList();
 
@@ -54,7 +54,7 @@ public class CarUtil {
             ResultSet result = JDBCConfig.getStatement().executeQuery(select);
 
             while (result.next()){
-                observableList.add(new PieChart.Data(String.valueOf(result.getInt("YEAR")), result.getInt(2)));
+                observableList.add(new PieChart.Data(String.valueOf(result.getInt("YEAR")), result.getInt("COUNT")));
             }
 
         } catch (SQLException e){

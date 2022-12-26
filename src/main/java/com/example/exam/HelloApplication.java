@@ -5,10 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.chart.Chart;
-import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -17,6 +16,10 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) {
         CarUtil.createTable();
+
+        Text mainText = new Text("Enter Car Information");
+        mainText.setLayoutX(100);
+        mainText.setLayoutY(20);
 
 
         TextField name = new TextField();
@@ -43,11 +46,12 @@ public class HelloApplication extends Application {
         finalText.setLayoutY(200);
 
         Button getChartButton = new Button("Get Chart");
-        getChartButton.setLayoutY(250);
-        getChartButton.setLayoutX(100);
+        getChartButton.setLayoutY(40);
+        getChartButton.setLayoutX(300);
 
         Group root = new Group();
 
+        root.getChildren().add(mainText);
         root.getChildren().add(name);
         root.getChildren().add(color);
         root.getChildren().add(year);
