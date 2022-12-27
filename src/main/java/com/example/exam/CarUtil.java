@@ -46,12 +46,12 @@ public class CarUtil {
 
     public static ObservableList<PieChart.Data> readData(){
 
-        String select = "SELECT YEAR, count(*) as Count FROM CARS GROUP BY YEAR";
+        String SELECT = "SELECT YEAR, count(*) as Count FROM CARS GROUP BY YEAR";
 
         ObservableList<PieChart.Data> observableList = FXCollections.observableArrayList();
 
         try{
-            ResultSet result = JDBCConfig.getStatement().executeQuery(select);
+            ResultSet result = JDBCConfig.getStatement().executeQuery(SELECT);
 
             while (result.next()){
                 observableList.add(new PieChart.Data(String.valueOf(result.getInt("YEAR")), result.getInt("COUNT")));
@@ -63,5 +63,28 @@ public class CarUtil {
 
         return observableList;
 
+    }
+
+    public static String deleteItem(int id){
+
+        String DELETE = "DELETE FROM CARS WHERE ID = " + id;
+
+        try {
+            JDBCConfig.getStatement().executeUpdate(DELETE);
+            return "Item deleted!";
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String clearData(){
+        String DELETE = "DELETE FROM CARS";
+
+        try {
+            JDBCConfig.getStatement().executeUpdate(DELETE);
+            return "Data deleted";
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 }
